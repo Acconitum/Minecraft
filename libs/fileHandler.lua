@@ -1,50 +1,50 @@
 --#########################################################
 -- writeFile
--- param: String file -> pathname
+-- param: String path -> pathname
 -- param: String message -> message to append
 --########################################################
 
-function writePath( file, message )
-  local file = io.open( file, "a" )
+function writeFile( path, message )
+  local file = io.open( path, "a" )
   file:write( tostring( message .. "\n" ) )
   file:close()
-end --writePath()
+end --writeFile()
 
 
 --#########################################################
--- getPath
--- param: file -> pathname
+-- getFileContent
+-- param: path -> pathname
 -- returns: table -> lines as key(int) value(string)
 --          bool false -> file not found
 --########################################################
 
-function getFileContent( file )
-  local returnTable = {}
-  if io.open( file ) then
-    local file = io.open( file, "r" )
-    local v = 1
+function getFileContent( path )
+  local content = {}
+  if io.open( path ) then
+    local file = io.open( path, "r" )
+    local lineCounter = 1
     for line in file:lines() do
-      path[v] = line
-      v = v + 1
+      content[lineCounter] = line
+      lineCounter = lineCounter + 1
     end
     file:close()
-    return returnTable
+    return content
   else
     file:close()
-    debug.printInfo( file .. " : File not found" )
+    --TODO errorlog
     return false
   end
-end --getPath()
+end --getFileContent()
 
 
 --#######################################################
--- resetPath
--- param: file -> pathname
+-- resetFile
+-- param: path -> pathname
 -- returns: bool true if success
 --########################################################
 
-function resetPath( file)
-  local file = io.open( file, "w" )
+function resetPath( path )
+  local file = io.open( path, "w" )
   file:close()
   return true
-end --resetPath
+end --resetFile
