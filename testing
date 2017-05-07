@@ -1,0 +1,4 @@
+local log = os.loadAPI( "libs/errorlog.lua" )
+
+log.test()
+log.test(true)
